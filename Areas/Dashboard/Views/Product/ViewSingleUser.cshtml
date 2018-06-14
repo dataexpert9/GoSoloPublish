@@ -1,0 +1,75 @@
+﻿@model BasketWebPanel.BindingModels.CommonUserViewModel
+@{
+    ViewBag.Title = "ViewSingleUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-lg-offset-3 col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        @if (string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                          <img src="~/Content/images/default.png" alt="" class="img-rounded img-responsive" />
+                        }
+                        else if (Model.ImageUrl.Contains("facebook"))
+                        {
+                          <img src="@Model.ImageUrl" alt="" class="img-rounded img-responsive" />
+
+                        }
+                        else
+                        {
+                          <img src="@ApiCall.BaseUrl@Model.ImageUrl" alt="" class="img-rounded img-responsive" />
+                        }
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            @Model.FullName
+                        </h4>
+                        @if (Model.SignInType == (int)Utility.Login_Types.Rider)
+                        {
+                            <p>Rider</p>
+                        }
+                        else
+                        {
+                            <p>Driver</p>
+                        }
+
+                        <cite title="San Francisco, USA">
+                            <i class="glyphicon glyphicon-map-marker">
+                                @Model.Address1
+                            </i>
+                        </cite>
+
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>      @Model.Email
+                            <br />
+                            <i class="glyphicon glyphicon-phone"></i>  : <a href="">@Model.Phone</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $('#btnDeleteNo').on("click", function (e) {
+        $('#deleteModal').modal('hide');
+        var lblError = $("#lblErrorOnDelete");
+        lblError.text("");
+        lblError.hide();
+    });
+
+    $('#btnDeleteClose').on("click", function (e) {
+        $('#deleteModal').modal('hide');
+        var lblError = $("#lblErrorOnDelete");
+        lblError.text("");
+        lblError.hide();
+    });
+
+
+</script>
+
